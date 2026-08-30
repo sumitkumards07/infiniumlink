@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { auth } from "@clerk/nextjs/server";
-import { ArrowRight, Code2, LayoutTemplate, Radio, Sparkles, Zap } from "lucide-react";
+import { ArrowRight, Code2, LayoutTemplate, Radio, Sparkles, Zap, Smartphone } from "lucide-react";
 import { redirect } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
@@ -33,6 +33,11 @@ const featureCards = [
     title: "Developer-ready",
     body: "Add your own integrations, custom blocks, and workflows without fighting the UI.",
     icon: Code2,
+  },
+  {
+    title: "Smart links",
+    body: "Send your audience straight into their favorite native apps instead of getting stuck in a mobile browser.",
+    icon: Smartphone,
   },
 ];
 
