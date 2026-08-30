@@ -50,7 +50,7 @@ export async function GET(
       referrer: request.headers.get("referer") || "direct",
       device: device.type || "desktop",
       browser: browser.name || "unknown",
-      country: request.geo?.country || "unknown",
+      country: request.headers.get("x-vercel-ip-country") || "unknown",
       ipHash: ipHash,
     });
   } catch (err) {

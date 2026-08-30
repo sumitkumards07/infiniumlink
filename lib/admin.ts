@@ -9,7 +9,7 @@ export const ADMIN_EMAILS = [
 // Note: In a real production app, you might want to rely on Clerk metadata (e.g., user.publicMetadata.role === 'admin')
 // or a users table boolean flag.
 export async function requireAdmin() {
-  const { userId, sessionClaims } = auth();
+  const { userId, sessionClaims } = await auth();
   
   if (!userId) {
     throw new Error("Unauthorized");

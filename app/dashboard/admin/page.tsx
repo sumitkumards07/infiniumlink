@@ -11,10 +11,10 @@ export default async function AdminDashboardPage() {
 
   // Fetch Aggregate Metrics
   const [
-    { count: totalUsers },
-    { count: totalPublished },
-    { count: totalClicks },
-    { count: totalSubs }
+    [{ count: totalUsers }],
+    [{ count: totalPublished }],
+    [{ count: totalClicks }],
+    [{ count: totalSubs }]
   ] = await Promise.all([
     db.select({ count: count() }).from(profiles),
     db.select({ count: count() }).from(pages).where(eq(pages.isPublished, true)),
@@ -89,7 +89,6 @@ export default async function AdminDashboardPage() {
               <thead className="[&_tr]:border-b">
                 <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
                   <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Username</th>
-                  <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Theme</th>
                   <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Joined</th>
                   <th className="h-12 px-4 text-right align-middle font-medium text-muted-foreground">Action</th>
                 </tr>
@@ -98,7 +97,6 @@ export default async function AdminDashboardPage() {
                 {recentProfiles.map((p) => (
                   <tr key={p.id} className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
                     <td className="p-4 align-middle font-medium">@{p.username}</td>
-                    <td className="p-4 align-middle">{p.theme}</td>
                     <td className="p-4 align-middle">
                       {p.createdAt ? formatDistanceToNow(p.createdAt, { addSuffix: true }) : "Unknown"}
                     </td>

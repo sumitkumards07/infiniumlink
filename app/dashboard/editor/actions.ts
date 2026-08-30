@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/db";
-import { blocks, pages } from "@/db/schema";
+import { blocks, pages, profiles } from "@/db/schema";
 import { auth } from "@clerk/nextjs/server";
 import { eq, and } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
@@ -18,10 +18,15 @@ export async function addBlockAction(pageId: string, type: BlockType) {
   // Verify ownership
   const page = await db.query.pages.findFirst({
     where: eq(pages.id, pageId),
-    with: { profile: true }
   });
   
-  if (!page || page.profile.userId !== userId) throw new Error("Unauthorized");
+  if (!page) throw new Error("Unauthorized");
+
+  const profile = await db.query.profiles.findFirst({
+    where: eq(profiles.id, page.profileId)
+  });
+
+  if (!profile || profile.userId !== userId) throw new Error("Unauthorized");
 
   const def = blockRegistry[type];
   if (!def) throw new Error("Invalid block type");

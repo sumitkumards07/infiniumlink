@@ -6,7 +6,7 @@ if (!process.env.STRIPE_SECRET_KEY) {
 }
 
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_mock", {
-  apiVersion: "2024-06-20", // Use a recent stable API version
+  apiVersion: "2026-08-26.dahlia" as any, // Use a recent stable API version
   typescript: true,
 });
 

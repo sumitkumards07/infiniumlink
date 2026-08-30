@@ -36,7 +36,7 @@ export function SidebarRight() {
     
     // Server
     try {
-      await updateBlockAction(selectedBlockId, updates);
+      await updateBlockAction(selectedBlockId!, updates);
     } catch(e) {
       console.error("Failed to update block", e);
     }
@@ -46,7 +46,7 @@ export function SidebarRight() {
     setBlocks(blocks.filter(b => b.id !== selectedBlockId));
     setSelectedBlockId(null);
     try {
-      await deleteBlockAction(selectedBlockId);
+      await deleteBlockAction(selectedBlockId!);
     } catch(e) {
       console.error(e);
     }

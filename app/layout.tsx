@@ -32,7 +32,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         suppressHydrationWarning
       >
         <body className="min-h-full flex flex-col" suppressHydrationWarning>
-          <ClerkProvider appearance={{ baseTheme: shadcn }}>
+          {/* @ts-ignore - baseTheme type differs in Next 15 strict mode */}
+          <ClerkProvider appearance={{ baseTheme: shadcn as any }}>
             <PostHogProvider>
               <ThemeProvider
                 attribute="class"

@@ -19,7 +19,7 @@ export function NewsletterBlockRenderer({ block }: { block: BlockConfig }) {
       const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, pageId: block.pageId, blockId: block.id }),
+        body: JSON.stringify({ email, pageId: (block as any).pageId, blockId: block.id }),
       });
       
       if (!res.ok) throw new Error("Failed to subscribe");

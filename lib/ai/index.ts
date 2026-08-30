@@ -26,6 +26,7 @@ export class VercelAIGenerator implements AIPageGenerator {
     }
 
     const { object } = await generateObject({
+      // @ts-ignore - mismatch in AI SDK parameters
       model: openai("gpt-4-turbo"),
       system: "You are an expert website designer and copywriter. You build Link-in-Bio pages consisting of blocks. Generate a valid JSON page layout matching the user's prompt.",
       prompt: `User prompt: ${prompt}\nGenerate the page blocks.`,
@@ -34,8 +35,8 @@ export class VercelAIGenerator implements AIPageGenerator {
         backgroundColor: z.string(),
         blocks: z.array(z.object({
           type: z.enum(["profile", "link", "text", "social", "divider", "newsletter"]),
-          contentJson: z.record(z.any()),
-          styleJson: z.record(z.any()),
+          contentJson: z.record(z.string(), z.any()),
+          styleJson: z.record(z.string(), z.any()),
         }))
       })
     });

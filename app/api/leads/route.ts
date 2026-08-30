@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { leads, pages } from "@/db/schema";
+import { leads, pages, profiles } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
@@ -14,15 +14,22 @@ export async function POST(req: Request) {
     // Resolve which user owns the page so we know who to give the lead to
     const page = await db.query.pages.findFirst({
       where: eq(pages.id, pageId),
-      with: { profile: true },
     });
 
     if (!page) {
       return new NextResponse("Page not found", { status: 404 });
     }
 
+    const profile = await db.query.profiles.findFirst({
+      where: eq(profiles.id, page.profileId),
+    });
+
+    if (!profile) {
+      return new NextResponse("Profile not found", { status: 404 });
+    }
+
     await db.insert(leads).values({
-      userId: page.profile.userId,
+      userId: profile.userId,
       email,
       pageId,
       blockId,
