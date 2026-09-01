@@ -1,10 +1,10 @@
 "use server";
 
 import { db } from "@/db";
-import { profiles, users } from "@/db/schema";
-import { auth, currentUser } from "@clerk/nextjs/server";
-import { eq } from "drizzle-orm";
-import { redirect } from "next/navigation";
+import { profiles } from "@/db/schema";
+import { auth } from "@clerk/nextjs/server";
+import { eq, ne, and } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 
 // Reserved usernames
 const RESERVED = new Set([
@@ -12,7 +12,7 @@ const RESERVED = new Set([
   "pricing", "support", "help", "about", "terms", "privacy", "go", "onboarding"
 ]);
 
-export async function claimUsername(prevState: any, formData: FormData) {
+export async function updateUsername(prevState: any, formData: FormData) {
   const { userId } = await auth();
   if (!userId) {
     throw new Error("Unauthorized");
@@ -26,7 +26,6 @@ export async function claimUsername(prevState: any, formData: FormData) {
 
   const normalized = username.toLowerCase().trim();
 
-  // Basic regex check: lowercase alphanumeric and dashes
   if (!/^[a-z0-9-]+$/.test(normalized)) {
     return { error: "Username can only contain lowercase letters, numbers, and hyphens" };
   }
@@ -35,32 +34,20 @@ export async function claimUsername(prevState: any, formData: FormData) {
     return { error: "This username is reserved" };
   }
 
-  // Check if username exists
+  // Check if username is taken by someone else
   const existing = await db.query.profiles.findFirst({
-    where: eq(profiles.username, normalized),
+    where: and(eq(profiles.username, normalized), ne(profiles.userId, userId)),
   });
 
   if (existing) {
     return { error: "Username is already taken" };
   }
 
-  // Ensure user exists in the DB (fallback if webhooks are delayed/not configured locally)
-  const user = await currentUser();
-  if (user) {
-    await db.insert(users).values({
-      id: userId,
-      email: user.emailAddresses[0]?.emailAddress || "",
-      firstName: user.firstName,
-      lastName: user.lastName,
-      avatarUrl: user.imageUrl,
-    }).onConflictDoNothing();
-  }
+  await db.update(profiles)
+    .set({ username: normalized })
+    .where(eq(profiles.userId, userId));
 
-  // Create the profile
-  await db.insert(profiles).values({
-    userId,
-    username: normalized,
-  });
-
-  redirect("/dashboard");
+  revalidatePath("/dashboard/settings");
+  
+  return { success: true };
 }
