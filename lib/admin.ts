@@ -1,8 +1,8 @@
 import { auth } from "@clerk/nextjs/server";
 
 export const ADMIN_EMAILS = [
-  "admin@linkflow.com",
-  "founder@linkflow.com",
+  "admin@infinium.com",
+  "founder@infinium.com",
   "sumitkumar@test.com" // You can replace this with your actual Clerk email
 ];
 

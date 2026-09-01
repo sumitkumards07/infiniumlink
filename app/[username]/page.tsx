@@ -26,10 +26,10 @@ export async function generateMetadata({
   if (!page) return { title: "Not Found" };
 
   return {
-    title: page.seoTitle || `${username} | LinkFlow`,
+    title: page.seoTitle || `${username} | Infinium`,
     description: page.seoDescription || `Check out ${username}'s page.`,
     openGraph: {
-      title: page.seoTitle || `${username} | LinkFlow`,
+      title: page.seoTitle || `${username} | Infinium`,
       description: page.seoDescription || `Check out ${username}'s page.`,
       images: page.ogImage ? [page.ogImage] : [],
     },
@@ -43,7 +43,7 @@ export default async function PublicProfilePage({
 }) {
   const { username } = await params;
 
-  if (username === "go" || username === "api" || username === "admin" || username === "onboarding") {
+  if (["go", "api", "admin", "onboarding", "dashboard", "sign-in", "sign-up", "demo"].includes(username)) {
     notFound();
   }
 

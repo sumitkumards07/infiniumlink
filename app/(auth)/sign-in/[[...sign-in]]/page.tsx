@@ -6,7 +6,7 @@ export default function SignInPage() {
   return (
     <AuthScreen
       mode="sign-in"
-      title="Log in to your LinkFlow"
+      title="Log in to your Infinium"
       helper="Step back into your editor, refresh your links, and publish updates with the same visual system as the new landing experience."
       altHref="/sign-up"
       altLabel="Don't have an account?"
