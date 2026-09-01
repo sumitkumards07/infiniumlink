@@ -104,5 +104,70 @@ export const landingContent = {
       { label: "Refund Policy", url: "https://app.inapp.app/refund" },
       { label: "Delete Account", url: "https://app.inapp.app/delete-account" }
     ]
+  },
+  analytics: {
+    eyebrow: "Analytics",
+    headlineLine1: "Measure",
+    headlineLine2: "everything",
+    body: "Understand your audience.",
+    stats: [{ label: "Clicks", value: "10k+" }, { label: "CTR", value: "12%" }],
+    cta: "View Analytics"
+  },
+  createPage: {
+    eyebrow: "Create",
+    headlineLine1: "Build your",
+    headlineLine2: "page in minutes",
+    body: "No code required.",
+    features: ["Drag & Drop interface", "Real-time preview", "Custom CSS support"],
+    cta: "Start Building"
+  },
+  faq: {
+    eyebrow: "FAQ",
+    headlineLine1: "Common",
+    headlineLine2: "questions",
+    items: [{ question: "Is it free?", answer: "Yes." }]
+  },
+  featureShowcase: [
+    { eyebrow: "Share", headlineLine1: "Share", headlineLine2: "everywhere", body: "Any platform.", cta: "Learn more" },
+    { eyebrow: "Monetize", headlineLine1: "Make", headlineLine2: "money", body: "Sell products.", cta: "Learn more" },
+    { eyebrow: "Grow", headlineLine1: "Grow", headlineLine2: "fast", body: "Increase audience.", cta: "Learn more" }
+  ],
+  press: {
+    eyebrow: "Press",
+    headlineLine1: "In the",
+    headlineLine2: "news",
+    publications: ["TechCrunch", "Wired", "The Verge", "Forbes"]
+  },
+  shareEverywhere: {
+    eyebrow: "Share",
+    headlineLine1: "Share",
+    headlineLine2: "everywhere",
+    body: "Link in bio.",
+    features: ["Instagram", "TikTok", "Twitter", "LinkedIn"],
+    cta: "Get Started"
+  },
+  socialProof: {
+    eyebrow: "Social Proof",
+    headlineLine1: "Trusted by",
+    headlineLine2: "creators",
+    profiles: [{ type: "Creator", quote: "This is the best tool I've used." }]
+  },
+  testimonials: {
+    headlineLine1: "What they",
+    headlineLine2: "say",
+    items: [{ quote: "Love it.", author: "Jane Doe", role: "Designer" }]
+  },
+  trustStrip: {
+    eyebrow: "Trust",
+    headlineLine1: "Trusted by",
+    headlineLine2: "brands",
+    body: "Global companies.",
+    categories: ["Tech", "Design", "Fashion", "Music"]
+  },
+  whyUs: {
+    eyebrow: "Why Us",
+    headlineLine1: "Why choose",
+    headlineLine2: "inApp",
+    features: [{ number: "01", title: "Fast", description: "Lightning fast." }]
   }
 };
