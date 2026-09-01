@@ -42,7 +42,7 @@ export function ShareEverywhere() {
               {/* URL Card */}
               <div className="absolute bottom-[20%] -right-12 bg-primary text-primary-foreground py-4 px-6 shadow-xl z-30 flex items-center gap-4">
                 <Share2 className="size-5" />
-                <span className="font-sans text-[13px] font-bold tracking-widest uppercase">linkflow.me/you</span>
+                <span className="font-sans text-[13px] font-bold tracking-widest uppercase">infiniumlink.vercel.app/you</span>
               </div>
             </div>
           </div>

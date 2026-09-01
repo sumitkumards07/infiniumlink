@@ -43,7 +43,7 @@ export const landingContent = {
       { title: "Deep Linking", description: "Links open in native apps. YouTube, Spotify, Instagram, and 7 more." },
       { title: "Bio Pages", description: "6 stunning templates. Upload images, customize everything. Your digital identity." },
       { title: "Analytics", description: "Country, city, device, browser, OS, referrer. Know exactly who clicks." },
-      { title: "Custom Domains", description: "Use your own domain. go.yourdomain.com instead of inapp.app/you." },
+      { title: "Custom Domains", description: "Use your own domain. go.yourdomain.com instead of infiniumlink.vercel.app/you." },
       { title: "Team Management", description: "Invite editors and viewers. Manage links together without sharing passwords." },
       { title: "QR Codes", description: "Generate and download QR codes for any link. Works offline." },
       { title: "Smart Features", description: "Password protection, link expiry, scheduled activation, geo redirects." },
@@ -98,11 +98,11 @@ export const landingContent = {
   footer: {
     brand: "inApp",
     links: [
-      { label: "Privacy Policy", url: "https://app.inapp.app/privacy" },
-      { label: "Terms of Service", url: "https://app.inapp.app/terms" },
-      { label: "Pricing", url: "https://app.inapp.app/pricing" },
-      { label: "Refund Policy", url: "https://app.inapp.app/refund" },
-      { label: "Delete Account", url: "https://app.inapp.app/delete-account" }
+      { label: "Privacy Policy", url: "https://infiniumlink.vercel.app/privacy" },
+      { label: "Terms of Service", url: "https://infiniumlink.vercel.app/terms" },
+      { label: "Pricing", url: "https://infiniumlink.vercel.app/pricing" },
+      { label: "Refund Policy", url: "https://infiniumlink.vercel.app/refund" },
+      { label: "Delete Account", url: "https://infiniumlink.vercel.app/delete-account" }
     ]
   },
   analytics: {

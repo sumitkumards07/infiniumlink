@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     const { plan } = body; // 'pro' or 'business'
 
     const priceId = plan === "business" ? STRIPE_PLANS.business : STRIPE_PLANS.pro;
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://infiniumlink.vercel.app";
 
     const userSubscription = await db.query.subscriptions.findFirst({
       where: eq(subscriptions.userId, userId),
