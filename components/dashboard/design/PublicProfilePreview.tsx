@@ -17,8 +17,18 @@ const getIcon = (platform: string) => {
   }
 };
 
-export function PublicProfilePreview() {
-  const { state } = useDesignEditor();
+import { DesignState } from "./DesignProvider";
+
+export function PublicProfilePreview({ initialState }: { initialState?: DesignState }) {
+  let state: DesignState;
+  
+  if (initialState) {
+    state = initialState;
+  } else {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const context = useDesignEditor();
+    state = context.state;
+  }
   const { layoutStyle, titleStyle, displayName, fontFamily, titleColor, bio, socials, avatarUrl } = state;
 
   // Spring animation config

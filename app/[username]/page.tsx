@@ -3,8 +3,7 @@ import { db } from "@/db";
 import { profiles, pages, blocks } from "@/db/schema";
 import { eq, and, asc } from "drizzle-orm";
 import { Metadata } from "next";
-import { PageRenderer } from "@/lib/blocks/PageRenderer";
-import { BlockConfig } from "@/lib/blocks/types";
+import { PublicProfilePreview } from "@/components/dashboard/design/PublicProfilePreview";
 
 export async function generateMetadata({
   params,
@@ -74,21 +73,11 @@ export default async function PublicProfilePage({
   }
 
   const pageData = latestVersion.pageDataJson as any;
-  const blocksConfig: BlockConfig[] = (pageData.blocks || []).map((b: any) => ({
-    id: b.id,
-    type: b.type as any,
-    position: b.position,
-    contentJson: b.contentJson || {},
-    styleJson: b.styleJson || {},
-    layoutJson: b.layoutJson || {},
-    animationJson: b.animationJson || {},
-    visibilityJson: b.visibilityJson || {},
-  }));
+  const state = pageData.state || page.appearanceJson;
 
   return (
-    <PageRenderer 
-      blocks={blocksConfig} 
-      appearance={pageData.page?.appearanceJson || {}} 
-    />
+    <div className="w-full h-screen">
+      <PublicProfilePreview initialState={state} />
+    </div>
   );
 }

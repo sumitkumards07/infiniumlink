@@ -154,17 +154,31 @@ export function DesignProvider({ children }: { children: React.ReactNode }) {
     setSaveStatus("Unsaved changes");
   }, [currentIndex, history.length]);
 
-  const publish = useCallback(() => {
-    // Publish is the only action that "commits" — persist immediately.
+  const publish = useCallback(async () => {
+    setSaveStatus("Publishing...");
+    
+    // 1. Save to local storage for immediate draft sync
     try {
       window.localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(state));
     } catch {
       // Ignore storage errors.
     }
-    setSaveStatus("Publishing...");
-    setTimeout(() => {
+
+    // 2. Publish to the backend
+    try {
+      const res = await fetch("/api/page/publish", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(state),
+      });
+
+      if (!res.ok) throw new Error("Failed to publish");
+      
       setSaveStatus("All changes saved");
-    }, 1000);
+    } catch (err) {
+      console.error(err);
+      setSaveStatus("Unsaved changes"); // Revert status on failure
+    }
   }, [state]);
 
   // Keyboard shortcuts: Cmd/Ctrl+Z undo, Cmd/Ctrl+Shift+Z redo, Cmd/Ctrl+S publish.
